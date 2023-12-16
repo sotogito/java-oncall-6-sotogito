@@ -1,26 +1,26 @@
 package oncall.domain.Calendar;
 
 public enum PublicHolidayInfo {
-    NEW_YEAR("1", 1, "신정"),
-    INDEPENDENCE_MOVEMENT_DAY("3", 1, "삼일절"),
-    CHILDRENS_DAY("5", 5, "어린이날"),
-    MEMORIAL_DAY("6", 6, "현충일"),
-    LIBERATION_DAY("8", 15, "광복절"),
-    NATIONAL_FOUNDATION_DAY("10", 3, "개천절"),
-    HANGEUL_DAY("10", 9, "한글날"),
-    CHRISTMAS("12", 25, "크리스마스");
+    NEW_YEAR(1, 1, "신정"),
+    INDEPENDENCE_MOVEMENT_DAY(3, 1, "삼일절"),
+    CHILDRENS_DAY(5, 5, "어린이날"),
+    MEMORIAL_DAY(6, 6, "현충일"),
+    LIBERATION_DAY(8, 15, "광복절"),
+    NATIONAL_FOUNDATION_DAY(10, 3, "개천절"),
+    HANGEUL_DAY(10, 9, "한글날"),
+    CHRISTMAS(12, 25, "크리스마스");
 
-    private final String month;
+    private final int month;
     private final int day;
     private final String name;
 
-    PublicHolidayInfo(String month, int day, String name) {
+    PublicHolidayInfo(int month, int day, String name) {
         this.month = month;
         this.day = day;
         this.name = name;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
@@ -32,9 +32,9 @@ public enum PublicHolidayInfo {
         return name;
     }
 
-    public static boolean isHoliday(String month, int day) {
+    public static boolean isHoliday(int month, int day) {
         for (PublicHolidayInfo holiday : PublicHolidayInfo.values()) {
-            if (holiday.getMonth().equals(month) && holiday.getDay() == day) {
+            if (holiday.getMonth() == month && holiday.getDay() == day) {
                 return true;
             }
         }

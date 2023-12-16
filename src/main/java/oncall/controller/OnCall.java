@@ -17,6 +17,7 @@ public class OnCall {
         MemberManager memberManager = createMemberManager();
 
         List<DayInfo> sortedWeek = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
+
         for(DayInfo str : sortedWeek){
             if(str.isWeekEnd()){
                 System.out.println("주말");
