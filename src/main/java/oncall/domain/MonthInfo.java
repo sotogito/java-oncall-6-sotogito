@@ -1,18 +1,18 @@
 package oncall.domain;
 
 public enum MonthInfo {
-    JANUARY("1월", "월요일", 31),
-    FEBRUARY("2월", "수요일", 28),
-    MARCH("3월", "월요일", 31),
-    APRIL("4월", "목요일", 30),
-    MAY("5월", "토요일", 31),
-    JUNE("6월", "화요일", 30),
-    JULY("7월", "목요일", 31),
-    AUGUST("8월", "일요일", 31),
-    SEPTEMBER("9월", "수요일", 30),
-    OCTOBER("10월", "금요일", 31),
-    NOVEMBER("11월", "월요일", 30),
-    DECEMBER("12월", "수요일", 31);
+    JANUARY("1월", "일", 31),
+    FEBRUARY("2월", "수", 28),
+    MARCH("3월", "수", 31),
+    APRIL("4월", "토", 30),
+    MAY("5월", "월", 31),
+    JUNE("6월", "목", 30),
+    JULY("7월", "토", 31),
+    AUGUST("8월", "화", 31),
+    SEPTEMBER("9월", "금", 30),
+    OCTOBER("10월", "일", 31),
+    NOVEMBER("11월", "수", 30),
+    DECEMBER("12월", "금", 31);
 
     private final String monthName;
     private final String startDayOfWeek;

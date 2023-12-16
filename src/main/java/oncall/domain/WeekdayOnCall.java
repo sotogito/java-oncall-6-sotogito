@@ -1,5 +1,7 @@
 package oncall.domain;
 
+import oncall.util.MemberValidator;
+
 import java.util.List;
 
 public class WeekdayOnCall {
@@ -8,5 +10,9 @@ public class WeekdayOnCall {
 
     public WeekdayOnCall(List<String> weekdayOnCall) {
         this.weekdayOnCall = weekdayOnCall;
+    }
+
+    public List<String> getWeekdayOnCall(){
+        return weekdayOnCall;
     }
 }
