@@ -5,106 +5,64 @@ import oncall.domain.Calendar.MonthInfo;
 import oncall.domain.Calendar.PublicHolidayInfo;
 import oncall.domain.CalendarManager;
 import oncall.domain.MemberManager;
+import oncall.view.OutputView;
 
 import java.util.List;
 
 public class OnCallPrinter {
-    CalendarManager calendarManager;
-    MemberManager memberManager;
-    int month;
-    List<Integer> dayList;
-    List<DayInfo> weekday;
-    List<String> weekdayMember;
-    List<String> weekendMember;
+    private final int month; //월
+    private final List<Integer> dayList; //일
+    private final List<DayInfo> weekdayList; //요일
+    private final List<String> weekdayMember; //평일 콜온 멤버
+    private final List<String> weekendMember; //주말 콜온 멤버
 
 
     public OnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {
-        this.calendarManager = calendarManager;
-        this.memberManager = memberManager;
         month = calendarManager.getMonth();
         dayList = MonthInfo.getDaysOfMonth(month);
-        weekday = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
+        weekdayList = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
         weekdayMember = memberManager.getWeekdayOnCall();
         weekendMember = memberManager.getWeekendOnCall();
     }
 
-    public void print(){
-        int monthData = month;
-        int dayData;
-        String weekdayData;
-        DayInfo dayInfo;
-        String member="";
-        int weekdayIndex=0;
-        int weekendindax=0;
+    public void print() {
+        int weekdayIndex = 0;
+        int weekendIndex = 0;
+        String prevMember = "";
+        duringMonth(weekdayIndex, weekendIndex, prevMember);
+    }
 
-
+    private void duringMonth(int weekdayIndex, int weekendIndex, String prevMember) {
         for (int i = 0; i < dayList.size(); i++) {
-            dayData = dayList.get(i);
-            weekdayData = weekday.get(i % weekday.size()).day();
-            if(PublicHolidayInfo.isHoliday(monthData,dayData)){ //휴일 판별
-                weekdayData += "(휴일)";
+            String weekdayData = weekdayList.get(i % weekdayList.size()).day();
+            String memberData = "";
+            boolean isHoliday = checkHoliday(dayList.get(i), weekdayData);
+            if (!weekdayList.get(i % weekdayList.size()).isWeekEnd() && !isHoliday) {
+                memberData = getAdjustedMember(weekdayMember, prevMember, weekdayIndex);
+                weekdayIndex = (weekdayIndex + 1) % weekdayMember.size();
+            } else if (weekdayList.get(i % weekdayList.size()).isWeekEnd()) {
+                memberData = getAdjustedMember(weekendMember, prevMember, weekendIndex);
+                weekendIndex = (weekendIndex + 1) % weekendMember.size();
             }
-            if(!weekday.get(i % weekday.size()).isWeekEnd()){
-                member = weekdayMember.get(weekdayIndex%weekdayMember.size());
-                weekdayIndex++;
-            } else if (weekday.get(i % weekday.size()).isWeekEnd()) {
-                member = weekendMember.get(weekendindax%weekendMember.size());
-                weekendindax++;
-
-            }
-
-
-            System.out.println(monthData+"월 "+dayData+"일 "+weekdayData+" "+member);
-
-        }
-
-        //달 : calendarManager.getMonth();
-        //일 :
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    public void printq() {
-        int account = MonthInfo.getNumberOfDays(calendarManager.getMonth());
-        List<DayInfo> sortedWeekDay = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
-        List<String> weekdayMember = memberManager.getWeekdayOnCall();
-        List<String> weekendMember = memberManager.getWeekendOnCall();
-
-        String previousMember = "";
-        for (int i = 0; i < account; i++) {
-            DayInfo dayInfo = sortedWeekDay.get(i % sortedWeekDay.size());
-            String member;
-
-            if (dayInfo.isWeekEnd()) {
-                member = getNextMember(weekendMember, previousMember);
-            } else {
-                member = getNextMember(weekdayMember, previousMember);
-            }
-
-            System.out.println(String.format("5월 %d일 %s %s", i + 1, dayInfo.day(), member));
-            previousMember = member;
+            OutputView.printOnCallList(month, dayList.get(i), weekdayData, memberData);
+            prevMember = memberData;
         }
     }
 
-    private String getNextMember(List<String> members, String previousMember) {
-        for (String member : members) {
-            if (!member.equals(previousMember)) {
-                return member;
-            }
+    private boolean checkHoliday(int dayData, String weekdayData) {
+        boolean isHoliday = PublicHolidayInfo.isHoliday(month, dayData);
+        if (isHoliday) {
+            weekdayData += "(휴일)";
         }
-        return members.get(0); // Fallback, should not happen if members list is correctly set up
+        return isHoliday;
     }
 
+    private String getAdjustedMember(List<String> members, String prevMember, int currentIndex) {
+        String nextMember = members.get(currentIndex % members.size());
+        if (nextMember.equals(prevMember)) {
+            return members.get((currentIndex + 1) % members.size());
+        }
+        return nextMember;
+    }
 
 }

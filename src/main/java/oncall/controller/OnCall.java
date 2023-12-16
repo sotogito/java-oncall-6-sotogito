@@ -15,25 +15,9 @@ public class OnCall {
     public void run(){
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
-
-        List<DayInfo> sortedWeek = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
-
         OnCallPrinter onCallPrinter = runOnCallPrinter(calendarManager,memberManager);
+
         onCallPrinter.print();
-
-
-        /*
-        for(DayInfo str : sortedWeek){
-            if(str.isWeekEnd()){
-                System.out.println("주말");
-            } else if (!str.isWeekEnd()) {
-                System.out.println("평일");
-            }
-        }
-
-         */
-
-
     }
 
     private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager,MemberManager memberManager){
@@ -48,8 +32,6 @@ public class OnCall {
             return createCalendarManager();
         }
     }
-
-
 
     private MemberManager createMemberManager(){
         try{
@@ -68,4 +50,5 @@ public class OnCall {
     private WeekendOnCall createWeekendOnCall(){
         return new WeekendOnCall(InputView.inputWeekendMemebr());
     }
+    
 }
