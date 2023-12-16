@@ -1,6 +1,6 @@
-package oncall.domain;
+package oncall.domain.Calendar;
 
-public enum PublicHoliday {
+public enum PublicHolidayInfo {
     NEW_YEAR("1", 1, "신정"),
     INDEPENDENCE_MOVEMENT_DAY("3", 1, "삼일절"),
     CHILDRENS_DAY("5", 5, "어린이날"),
@@ -14,7 +14,7 @@ public enum PublicHoliday {
     private final int day;
     private final String name;
 
-    PublicHoliday(String month, int day, String name) {
+    PublicHolidayInfo(String month, int day, String name) {
         this.month = month;
         this.day = day;
         this.name = name;
@@ -33,7 +33,7 @@ public enum PublicHoliday {
     }
 
     public static boolean isHoliday(String month, int day) {
-        for (PublicHoliday holiday : PublicHoliday.values()) {
+        for (PublicHolidayInfo holiday : PublicHolidayInfo.values()) {
             if (holiday.getMonth().equals(month) && holiday.getDay() == day) {
                 return true;
             }

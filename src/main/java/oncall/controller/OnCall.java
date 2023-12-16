@@ -1,5 +1,6 @@
 package oncall.controller;
 
+import oncall.domain.Calendar.DayInfo;
 import oncall.domain.CalendarManager;
 import oncall.domain.MemberManager;
 import oncall.domain.WeekdayOnCall;
@@ -7,17 +8,24 @@ import oncall.domain.WeekendOnCall;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
+import java.util.List;
+
 public class OnCall {
 
     public void run(){
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
 
-        System.out.print(calendarManager.getDay());
-        System.out.print(calendarManager.getMonth());
+        List<DayInfo> sortedWeek = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
+        for(DayInfo str : sortedWeek){
+            if(str.isWeekEnd()){
+                System.out.println("주말");
+            } else if (!str.isWeekEnd()) {
+                System.out.println("평일");
+            }
+        }
 
-        System.out.print(memberManager.getWeekdayOnCall());
-        System.out.print(memberManager.getWeekendOnCall());
+
     }
 
     private CalendarManager createCalendarManager(){
