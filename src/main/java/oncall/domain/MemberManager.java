@@ -7,11 +7,11 @@ public class MemberManager {
     private WeekendOnCall weekendOnCall;
 
 
-    public MemberManager(List<String> weekday, List<String> weekend) {
+    public MemberManager(WeekdayOnCall weekdayOnCall, WeekendOnCall weekendOnCall) {
         //동일한 사이즈?
         //동일한 멤버?
-        weekdayOnCall = new WeekdayOnCall(weekday);
-        weekendOnCall = new WeekendOnCall(weekend);
+        this.weekdayOnCall = weekdayOnCall;
+        this.weekendOnCall =weekendOnCall;
 
     }
 
