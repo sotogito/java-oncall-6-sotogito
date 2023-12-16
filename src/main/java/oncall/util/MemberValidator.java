@@ -10,15 +10,15 @@ public class MemberValidator {
 
     public static void memberValidate(List<String> list){
         if(hasDuplicates(list)){
-            throw new IllegalArgumentException(ERROR_MEMBER);
+            throw new IllegalArgumentException(ERROR_MEMBER+"1");
         } else if (!isWithinRange(list)) {
-            throw new IllegalArgumentException(ERROR_MEMBER);
+            throw new IllegalArgumentException(ERROR_MEMBER+"2");
         }
     }
 
     public static void membersValidate(List<String> list1, List<String> list2){
         if(!areListsEqual(list1,list2)){
-            throw new IllegalArgumentException(ERROR_MEMBER);
+            throw new IllegalArgumentException(ERROR_MEMBER+"3");
         }
     }
 

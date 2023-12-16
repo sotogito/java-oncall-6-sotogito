@@ -1,20 +1,20 @@
 package oncall.domain;
 
 public enum PublicHoliday {
-    NEW_YEAR("1", "1", "신정"),
-    INDEPENDENCE_MOVEMENT_DAY("3", "1", "삼일절"),
-    CHILDRENS_DAY("5", "5", "어린이날"),
-    MEMORIAL_DAY("6", "6", "현충일"),
-    LIBERATION_DAY("8", "15", "광복절"),
-    NATIONAL_FOUNDATION_DAY("10", "3", "개천절"),
-    HANGEUL_DAY("10", "9", "한글날"),
-    CHRISTMAS("12", "25", "크리스마스");
+    NEW_YEAR("1", 1, "신정"),
+    INDEPENDENCE_MOVEMENT_DAY("3", 1, "삼일절"),
+    CHILDRENS_DAY("5", 5, "어린이날"),
+    MEMORIAL_DAY("6", 6, "현충일"),
+    LIBERATION_DAY("8", 15, "광복절"),
+    NATIONAL_FOUNDATION_DAY("10", 3, "개천절"),
+    HANGEUL_DAY("10", 9, "한글날"),
+    CHRISTMAS("12", 25, "크리스마스");
 
     private final String month;
-    private final String day;
+    private final int day;
     private final String name;
 
-    PublicHoliday(String month, String day, String name) {
+    PublicHoliday(String month, int day, String name) {
         this.month = month;
         this.day = day;
         this.name = name;
@@ -24,7 +24,7 @@ public enum PublicHoliday {
         return month;
     }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
@@ -32,13 +32,12 @@ public enum PublicHoliday {
         return name;
     }
 
-    public static boolean isHoliday(String month, String day) {
+    public static boolean isHoliday(String month, int day) {
         for (PublicHoliday holiday : PublicHoliday.values()) {
-            if (holiday.getMonth().equals(month) && holiday.getDay().equals(day)) {
+            if (holiday.getMonth().equals(month) && holiday.getDay() == day) {
                 return true;
             }
         }
         return false;
     }
-
 }

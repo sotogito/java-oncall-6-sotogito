@@ -10,8 +10,6 @@ public class MemberManager {
 
 
     public MemberManager(WeekdayOnCall weekdayOnCall, WeekendOnCall weekendOnCall) {
-        //동일한 사이즈?
-        //동일한 멤버?
         MemberValidator.memberValidate(weekdayOnCall.getWeekdayOnCall());
         MemberValidator.memberValidate(weekendOnCall.getWeekendOnCall());
         MemberValidator.membersValidate(weekdayOnCall.getWeekdayOnCall(),weekdayOnCall.getWeekdayOnCall());
