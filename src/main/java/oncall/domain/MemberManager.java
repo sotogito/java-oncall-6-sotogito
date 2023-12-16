@@ -5,24 +5,23 @@ import oncall.util.MemberValidator;
 import java.util.List;
 
 public class MemberManager {
-    private WeekdayOnCall weekdayOnCall;
-    private WeekendOnCall weekendOnCall;
-
+    private final WeekdayOnCall weekdayOnCall;
+    private final WeekendOnCall weekendOnCall;
 
     public MemberManager(WeekdayOnCall weekdayOnCall, WeekendOnCall weekendOnCall) {
         MemberValidator.memberValidate(weekdayOnCall.getWeekdayOnCall());
         MemberValidator.memberValidate(weekendOnCall.getWeekendOnCall());
-        MemberValidator.membersValidate(weekdayOnCall.getWeekdayOnCall(),weekdayOnCall.getWeekdayOnCall());
+        MemberValidator.membersValidate(weekdayOnCall.getWeekdayOnCall(), weekdayOnCall.getWeekdayOnCall());
         this.weekdayOnCall = weekdayOnCall;
-        this.weekendOnCall =weekendOnCall;
+        this.weekendOnCall = weekendOnCall;
 
     }
 
-    public List<String> getWeekdayOnCall(){
+    public List<String> getWeekdayOnCall() {
         return weekdayOnCall.getWeekdayOnCall();
     }
 
-    public List<String> getWeekendOnCall(){
+    public List<String> getWeekendOnCall() {
         return weekendOnCall.getWeekendOnCall();
     }
 

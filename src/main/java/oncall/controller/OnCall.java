@@ -1,6 +1,5 @@
 package oncall.controller;
 
-import oncall.domain.Calendar.DayInfo;
 import oncall.domain.CalendarManager;
 import oncall.domain.MemberManager;
 import oncall.domain.WeekdayOnCall;
@@ -8,47 +7,46 @@ import oncall.domain.WeekendOnCall;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
-import java.util.List;
 
 public class OnCall {
 
-    public void run(){
+    public void run() {
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
-        OnCallPrinter onCallPrinter = runOnCallPrinter(calendarManager,memberManager);
+        OnCallPrinter onCallPrinter = runOnCallPrinter(calendarManager, memberManager);
 
         onCallPrinter.print();
     }
 
-    private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager,MemberManager memberManager){
-        return new OnCallPrinter(calendarManager,memberManager);
+    private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {
+        return new OnCallPrinter(calendarManager, memberManager);
     }
 
-    private CalendarManager createCalendarManager(){
-        try{
+    private CalendarManager createCalendarManager() {
+        try {
             return new CalendarManager(InputView.inputMonthDay());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createCalendarManager();
         }
     }
 
-    private MemberManager createMemberManager(){
-        try{
-            return new MemberManager(createWeekdayOnCall(),createWeekendOnCall());
-        }catch (IllegalArgumentException e){
+    private MemberManager createMemberManager() {
+        try {
+            return new MemberManager(createWeekdayOnCall(), createWeekendOnCall());
+        } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createMemberManager();
         }
 
     }
 
-    private WeekdayOnCall createWeekdayOnCall(){
+    private WeekdayOnCall createWeekdayOnCall() {
         return new WeekdayOnCall(InputView.inputWeekdayMember());
     }
 
-    private WeekendOnCall createWeekendOnCall(){
+    private WeekendOnCall createWeekendOnCall() {
         return new WeekendOnCall(InputView.inputWeekendMemebr());
     }
-    
+
 }

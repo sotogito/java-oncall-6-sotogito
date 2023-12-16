@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum DayInfo {
-    SUNDAY("일",true),
-    MONDAY("월",false),
-    TUESDAY("화",false),
-    WEDNESDAY("수",false),
-    THURSDAY("목",false),
-    FRIDAY("금",false),
-    SATURDAY("토",true);
+    SUNDAY("일", true),
+    MONDAY("월", false),
+    TUESDAY("화", false),
+    WEDNESDAY("수", false),
+    THURSDAY("목", false),
+    FRIDAY("금", false),
+    SATURDAY("토", true);
 
     private final String day;
     private final boolean isWeekEnd;
 
-    DayInfo(String day,boolean isWeekEnd) {
+    DayInfo(String day, boolean isWeekEnd) {
         this.day = day;
         this.isWeekEnd = isWeekEnd;
     }
@@ -24,7 +24,7 @@ public enum DayInfo {
         return day;
     }
 
-    public boolean isWeekEnd(){
+    public boolean isWeekEnd() {
         return isWeekEnd;
     }
 
@@ -47,26 +47,28 @@ public enum DayInfo {
 
     private static List<DayInfo> addOrderedDaysToList(DayInfo startDay) {
         List<DayInfo> orderedDays = new ArrayList<>();
-        boolean started = false;
+        addDaysFromStartDay(orderedDays, startDay);
+        addDaysBeforeStartDay(orderedDays, startDay);
+        return orderedDays;
+    }
 
-        // 시작 요일부터 순서대로 리스트에 추가
+    private static void addDaysFromStartDay(List<DayInfo> orderedDays, DayInfo startDay) {
+        boolean started = false;
         for (DayInfo day : DayInfo.values()) {
             if (day == startDay || started) {
                 orderedDays.add(day);
                 started = true;
             }
         }
+    }
 
-        // 시작 요일 이전의 요일을 순서대로 리스트에 추가
+    private static void addDaysBeforeStartDay(List<DayInfo> orderedDays, DayInfo startDay) {
         for (DayInfo day : DayInfo.values()) {
             if (day == startDay) {
                 break;
             }
             orderedDays.add(day);
         }
-
-        return orderedDays;
     }
-
 
 }

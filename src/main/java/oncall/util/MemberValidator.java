@@ -6,19 +6,23 @@ import java.util.Set;
 
 public class MemberValidator {
 
+    private final static int MIN = 5;
+    private final static int MAX = 35;
+
+
     private final static String ERROR_MEMBER = "유효하지 않은 입력 값입니다. 다시 입력해 주세요.\n";
 
-    public static void memberValidate(List<String> list){
-        if(hasDuplicates(list)){
-            throw new IllegalArgumentException(ERROR_MEMBER+"1");
+    public static void memberValidate(List<String> list) {
+        if (hasDuplicates(list)) {
+            throw new IllegalArgumentException(ERROR_MEMBER);
         } else if (!isWithinRange(list)) {
-            throw new IllegalArgumentException(ERROR_MEMBER+"2");
+            throw new IllegalArgumentException(ERROR_MEMBER);
         }
     }
 
-    public static void membersValidate(List<String> list1, List<String> list2){
-        if(!areListsEqual(list1,list2)){
-            throw new IllegalArgumentException(ERROR_MEMBER+"3");
+    public static void membersValidate(List<String> list1, List<String> list2) {
+        if (!areListsEqual(list1, list2)) {
+            throw new IllegalArgumentException(ERROR_MEMBER);
         }
     }
 
@@ -30,9 +34,8 @@ public class MemberValidator {
 
     private static boolean isWithinRange(List<String> list) {
 
-        return list.size() >= 5 && list.size() <= 35;
+        return list.size() >= MIN && list.size() <= MAX;
     }
-
 
     public static boolean hasDuplicates(List<String> list) {
         Set<String> set = new HashSet<>(list);

@@ -7,8 +7,9 @@ public class OutputView {
         System.out.print("[ERROR] " + error);
     }
 
-    public static void printOnCallList(int month, int day, String weekday, String member){
-        System.out.printf(ON_CALL_LIST_TEMPLATE,month,day,weekday,member);
+    public static void printOnCallList(int month, int day, String weekday, String member) {
+        System.out.printf(ON_CALL_LIST_TEMPLATE, month, day, weekday, member);
 
     }
+
 }
