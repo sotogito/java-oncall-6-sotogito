@@ -18,6 +18,11 @@ public class OnCall {
 
         List<DayInfo> sortedWeek = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
 
+        OnCallPrinter onCallPrinter = runOnCallPrinter(calendarManager,memberManager);
+        onCallPrinter.print();
+
+
+        /*
         for(DayInfo str : sortedWeek){
             if(str.isWeekEnd()){
                 System.out.println("주말");
@@ -26,7 +31,13 @@ public class OnCall {
             }
         }
 
+         */
 
+
+    }
+
+    private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager,MemberManager memberManager){
+        return new OnCallPrinter(calendarManager,memberManager);
     }
 
     private CalendarManager createCalendarManager(){
