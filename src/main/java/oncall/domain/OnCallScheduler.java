@@ -13,4 +13,5 @@ public class OnCallScheduler {
     public List<OnCallDayEntry> getOnCallList(){
         return onCallList;
     }
+
 }

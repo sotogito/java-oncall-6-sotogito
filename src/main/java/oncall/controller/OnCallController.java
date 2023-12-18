@@ -1,10 +1,9 @@
 package oncall.controller;
 
+import oncall.domain.*;
 import oncall.domain.Calendar.Month;
 import oncall.domain.Calendar.PublicHoliday;
 import oncall.domain.Calendar.Week;
-import oncall.domain.OnCallDayEntry;
-import oncall.domain.OnCallScheduler;
 import oncall.domain.manager.CalendarManager;
 import oncall.domain.manager.MemberManager;
 import oncall.domain.manager.member.WeekdayOnCallMember;
@@ -36,47 +35,27 @@ public class OnCallController {
     }
 
     private OnCallScheduler createOnCallScheduler(CalendarManager calendarManager,MemberManager memberManager){
+        OnCallMemberMaker weekdayMemberMaker = new WeekdayScheduler();
+        OnCallMemberMaker weekendMemberMaker = new WeekendScheduler();
+
+
+
         List<OnCallDayEntry> result = new ArrayList<>();
 
-
+        int month = calendarManager.getMonth();
         int dayCount = Month.getNumberOfDays(calendarManager.getMonth());
         List<Week> weekList = Week.getOrderedDaysStartingFrom(calendarManager.getDay());
 
         for(int i=1; i<=dayCount; i++){
-            Week dayOfWeek = weekList.get((i-1) % weekList.size());
-            result.add(createOnCallDayEntry(calendarManager.getMonth(),i,dayOfWeek,memberManager));
+            OnCallDayMaker onCallDayMaker = createOnCallMemberMaker(weekdayMemberMaker,weekendMemberMaker);
+            OnCallDayEntry member = onCallDayMaker.runMaker(month,i,weekList.get((i-1)%weekList.size()),memberManager);
+            result.add(member);
         }
         return new OnCallScheduler(result);
     }
 
-    private OnCallDayEntry createOnCallDayEntry(int month, int day,Week dayOfWeek,MemberManager memberManager){
-        int monthData = month; //월
-        int dayData = day; //일
-        String dayOfWeekData = dayOfWeek.day(); //요일
-        String memberData = "";
-
-        boolean isHoliday = PublicHoliday.isHoliday(monthData,dayData);
-
-        if(!dayOfWeek.isWeekEnd() && !isHoliday){ //+(휴일)
-            List<String> dayMember = memberManager.getWeekdayOnCall();
-            memberData = dayMember.get(weekdayIndex % dayMember.size());
-            weekdayIndex++;
-
-
-        }else if(dayOfWeek.isWeekEnd()){
-            List<String> endMember = memberManager.getWeekendOnCall();
-            memberData = endMember.get(weekendIndex % endMember.size());
-            weekendIndex++;
-        }
-        if(!dayOfWeek.isWeekEnd() && isHoliday){
-            List<String> endMember = memberManager.getWeekendOnCall();
-            memberData = endMember.get(weekendIndex % endMember.size());
-            weekendIndex++;
-            dayOfWeekData += "(휴일)";
-        }
-
-
-        return new OnCallDayEntry(monthData,dayData,dayOfWeekData,memberData);
+    private OnCallDayMaker createOnCallMemberMaker(OnCallMemberMaker weekday, OnCallMemberMaker weekend){
+        return new OnCallDayMaker(weekday,weekend);
     }
 
 
