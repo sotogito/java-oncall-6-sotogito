@@ -35,8 +35,6 @@ public class OnCallController {
     }
 
 
-
-
     private CalendarManager createCalendarManager() {
         try {
             return new CalendarManager(InputView.inputMonthDay());
