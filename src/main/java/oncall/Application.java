@@ -1,11 +1,11 @@
 package oncall;
 
-import oncall.controller.OnCall;
+import oncall.controller.OnCallController;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        OnCall onCall = new OnCall();
+        OnCallController onCall = new OnCallController();
         onCall.run();
     }
 }

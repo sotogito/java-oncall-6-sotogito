@@ -8,7 +8,7 @@ import oncall.view.InputView;
 import oncall.view.OutputView;
 
 
-public class OnCall {
+public class OnCallController {
 
     public void run() {
         CalendarManager calendarManager = createCalendarManager();

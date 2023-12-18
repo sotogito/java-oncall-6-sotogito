@@ -40,7 +40,7 @@ public class OnCallPrinter {
             if (!weekdayList.get(i % weekdayList.size()).isWeekEnd() && !isHoliday) {
                 memberData = getAdjustedMember(weekdayMember, prevMember, weekdayIndex);
                 weekdayIndex = (weekdayIndex + 1) % weekdayMember.size();
-            } else if (weekdayList.get(i % weekdayList.size()).isWeekEnd()) {
+            } else if (weekdayList.get(i % weekdayList.size()).isWeekEnd() || isHoliday) {
                 memberData = getAdjustedMember(weekendMember, prevMember, weekendIndex);
                 weekendIndex = (weekendIndex + 1) % weekendMember.size();
             }
