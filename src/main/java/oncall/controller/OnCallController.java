@@ -13,9 +13,7 @@ public class OnCallController {
     public void run() {
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
-        OnCallPrinter onCallPrinter = runOnCallPrinter(calendarManager, memberManager);
 
-        onCallPrinter.print();
     }
 
     private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {
