@@ -14,10 +14,8 @@ public class OnCallController {
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
 
-    }
 
-    private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {
-        return new OnCallPrinter(calendarManager, memberManager);
+
     }
 
     private CalendarManager createCalendarManager() {
@@ -45,6 +43,10 @@ public class OnCallController {
 
     private WeekendOnCall createWeekendOnCall() {
         return new WeekendOnCall(InputView.inputWeekendMemebr());
+    }
+
+    private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {
+        return new OnCallPrinter(calendarManager, memberManager);
     }
 
 }
