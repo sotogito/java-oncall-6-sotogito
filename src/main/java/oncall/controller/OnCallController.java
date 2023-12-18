@@ -42,7 +42,6 @@ public class OnCallController {
         int dayCount = Month.getNumberOfDays(calendarManager.getMonth());
         List<Week> weekList = Week.getOrderedDaysStartingFrom(calendarManager.getDay());
 
-
         for(int i=1; i<=dayCount; i++){
             Week dayOfWeek = weekList.get((i-1) % weekList.size());
             result.add(createOnCallDayEntry(calendarManager.getMonth(),i,dayOfWeek,memberManager));
@@ -75,7 +74,6 @@ public class OnCallController {
             weekendIndex++;
             dayOfWeekData += "(휴일)";
         }
-
 
 
         return new OnCallDayEntry(monthData,dayData,dayOfWeekData,memberData);
