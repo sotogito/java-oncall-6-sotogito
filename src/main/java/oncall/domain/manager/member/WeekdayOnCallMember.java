@@ -1,14 +1,12 @@
-package oncall.domain;
-
-import oncall.util.MemberValidator;
+package oncall.domain.manager.member;
 
 import java.util.List;
 
-public class WeekdayOnCall {
+public class WeekdayOnCallMember {
 
     private final List<String> weekdayOnCall;
 
-    public WeekdayOnCall(List<String> weekdayOnCall) {
+    public WeekdayOnCallMember(List<String> weekdayOnCall) {
         this.weekdayOnCall = weekdayOnCall;
     }
 

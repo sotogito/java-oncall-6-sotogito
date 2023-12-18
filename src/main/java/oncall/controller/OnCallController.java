@@ -1,9 +1,9 @@
 package oncall.controller;
 
-import oncall.domain.CalendarManager;
-import oncall.domain.MemberManager;
-import oncall.domain.WeekdayOnCall;
-import oncall.domain.WeekendOnCall;
+import oncall.domain.manager.CalendarManager;
+import oncall.domain.manager.MemberManager;
+import oncall.domain.manager.member.WeekdayOnCallMember;
+import oncall.domain.manager.member.WeekendOnCallMember;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -13,7 +13,6 @@ public class OnCallController {
     public void run() {
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
-
 
 
     }
@@ -37,12 +36,12 @@ public class OnCallController {
 
     }
 
-    private WeekdayOnCall createWeekdayOnCall() {
-        return new WeekdayOnCall(InputView.inputWeekdayMember());
+    private WeekdayOnCallMember createWeekdayOnCall() {
+        return new WeekdayOnCallMember(InputView.inputWeekdayMember());
     }
 
-    private WeekendOnCall createWeekendOnCall() {
-        return new WeekendOnCall(InputView.inputWeekendMemebr());
+    private WeekendOnCallMember createWeekendOnCall() {
+        return new WeekendOnCallMember(InputView.inputWeekendMemebr());
     }
 
     private OnCallPrinter runOnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {

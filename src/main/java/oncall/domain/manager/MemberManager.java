@@ -1,14 +1,16 @@
-package oncall.domain;
+package oncall.domain.manager;
 
+import oncall.domain.manager.member.WeekdayOnCallMember;
+import oncall.domain.manager.member.WeekendOnCallMember;
 import oncall.util.MemberValidator;
 
 import java.util.List;
 
 public class MemberManager {
-    private final WeekdayOnCall weekdayOnCall;
-    private final WeekendOnCall weekendOnCall;
+    private final WeekdayOnCallMember weekdayOnCall;
+    private final WeekendOnCallMember weekendOnCall;
 
-    public MemberManager(WeekdayOnCall weekdayOnCall, WeekendOnCall weekendOnCall) {
+    public MemberManager(WeekdayOnCallMember weekdayOnCall, WeekendOnCallMember weekendOnCall) {
         MemberValidator.memberValidate(weekdayOnCall.getWeekdayOnCall());
         MemberValidator.memberValidate(weekendOnCall.getWeekendOnCall());
         MemberValidator.membersValidate(weekdayOnCall.getWeekdayOnCall(), weekdayOnCall.getWeekdayOnCall());

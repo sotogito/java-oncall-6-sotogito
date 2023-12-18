@@ -1,10 +1,10 @@
 package oncall.controller;
 
-import oncall.domain.Calendar.DayInfo;
-import oncall.domain.Calendar.MonthInfo;
-import oncall.domain.Calendar.PublicHolidayInfo;
-import oncall.domain.CalendarManager;
-import oncall.domain.MemberManager;
+import oncall.domain.Calendar.Week;
+import oncall.domain.Calendar.Month;
+import oncall.domain.Calendar.PublicHoliday;
+import oncall.domain.manager.CalendarManager;
+import oncall.domain.manager.MemberManager;
 import oncall.view.OutputView;
 
 import java.util.List;
@@ -12,15 +12,15 @@ import java.util.List;
 public class OnCallPrinter {
     private final int month; //월
     private final List<Integer> dayList; //일
-    private final List<DayInfo> weekdayList; //요일
+    private final List<Week> weekdayList; //요일
     private final List<String> weekdayMember; //평일 콜온 멤버
     private final List<String> weekendMember; //주말 콜온 멤버
 
 
     public OnCallPrinter(CalendarManager calendarManager, MemberManager memberManager) {
         month = calendarManager.getMonth();
-        dayList = MonthInfo.getDaysOfMonth(month);
-        weekdayList = DayInfo.getOrderedDaysStartingFrom(calendarManager.getDay());
+        dayList = Month.getDaysOfMonth(month);
+        weekdayList = Week.getOrderedDaysStartingFrom(calendarManager.getDay());
         weekdayMember = memberManager.getWeekdayOnCall();
         weekendMember = memberManager.getWeekendOnCall();
     }
@@ -50,7 +50,7 @@ public class OnCallPrinter {
     }
 
     private boolean checkHoliday(int dayData, String weekdayData) {
-        boolean isHoliday = PublicHolidayInfo.isHoliday(month, dayData);
+        boolean isHoliday = PublicHoliday.isHoliday(month, dayData);
         if (isHoliday) {
             weekdayData += "(휴일)";
         }

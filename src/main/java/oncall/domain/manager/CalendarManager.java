@@ -1,6 +1,6 @@
-package oncall.domain;
+package oncall.domain.manager;
 
-import oncall.domain.Calendar.MonthInfo;
+import oncall.domain.Calendar.Month;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class CalendarManager {
     public CalendarManager(List<String> date) {
         int monthData = Integer.parseInt(date.get(0));
         String dayData = date.get(1);
-        MonthInfo.exists(monthData, dayData);
+        Month.exists(monthData, dayData);
         this.month = monthData;
         this.day = dayData;
 

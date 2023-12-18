@@ -5,7 +5,7 @@ import oncall.util.CalengarValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum MonthInfo {
+public enum Month {
     JANUARY(1, "일", 31),
     FEBRUARY(2, "수", 28),
     MARCH(3, "수", 31),
@@ -23,7 +23,7 @@ public enum MonthInfo {
     private final String startDayOfWeek;
     private final int numberOfDays;
 
-    MonthInfo(int monthName, String startDayOfWeek, int numberOfDays) {
+    Month(int monthName, String startDayOfWeek, int numberOfDays) {
         this.monthName = monthName;
         this.startDayOfWeek = startDayOfWeek;
         this.numberOfDays = numberOfDays;
@@ -42,16 +42,17 @@ public enum MonthInfo {
     }
 
     public static boolean exists(int monthName, String startDayOfWeek) {
-        for (MonthInfo monthInfo : MonthInfo.values()) {
+        for (Month monthInfo : Month.values()) {
             if (monthInfo.getMonthName() == monthName && monthInfo.getStartDayOfWeek().equals(startDayOfWeek)) {
                 return true;
             }
         }
         throw new IllegalArgumentException(CalengarValidator.ERROR_EXIST);
     }
+    /*
 
     public static int getNumberOfDays(int month) {
-        for (MonthInfo monthInfo : MonthInfo.values()) {
+        for (Month monthInfo : Month.values()) {
             if (monthInfo.getMonthName() == month) {
                 return monthInfo.getNumberOfDays();
             }
@@ -69,5 +70,7 @@ public enum MonthInfo {
 
         return dayList;
     }
+
+     */
 
 }

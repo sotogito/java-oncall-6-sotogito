@@ -17,6 +17,8 @@ public class MemberValidator {
             throw new IllegalArgumentException(ERROR_MEMBER);
         } else if (!isWithinRange(list)) {
             throw new IllegalArgumentException(ERROR_MEMBER);
+        } else if (!isNameWithinLength(list)) {
+            throw new IllegalArgumentException(ERROR_MEMBER);
         }
     }
 
@@ -40,6 +42,13 @@ public class MemberValidator {
     public static boolean hasDuplicates(List<String> list) {
         Set<String> set = new HashSet<>(list);
         return set.size() != list.size();
+    }
+
+    private static boolean isNameWithinLength(List<String> list){
+        for(String name : list){
+            return name.length() <= 5;
+        }
+        return false;
     }
 
 }

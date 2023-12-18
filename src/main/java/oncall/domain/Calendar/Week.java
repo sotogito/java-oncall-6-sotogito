@@ -3,7 +3,7 @@ package oncall.domain.Calendar;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum DayInfo {
+public enum Week {
     SUNDAY("일", true),
     MONDAY("월", false),
     TUESDAY("화", false),
@@ -15,7 +15,7 @@ public enum DayInfo {
     private final String day;
     private final boolean isWeekEnd;
 
-    DayInfo(String day, boolean isWeekEnd) {
+    Week(String day, boolean isWeekEnd) {
         this.day = day;
         this.isWeekEnd = isWeekEnd;
     }
@@ -28,16 +28,16 @@ public enum DayInfo {
         return isWeekEnd;
     }
 
-    public static List<DayInfo> getOrderedDaysStartingFrom(String startDay) {
-        DayInfo start = findDayOfWeekByKoreanName(startDay);
+    public static List<Week> getOrderedDaysStartingFrom(String startDay) {
+        Week start = findDayOfWeekByKoreanName(startDay);
         if (start != null) {
             return addOrderedDaysToList(start);
         }
         return new ArrayList<>();
     }
 
-    private static DayInfo findDayOfWeekByKoreanName(String koreanName) {
-        for (DayInfo day : DayInfo.values()) {
+    private static Week findDayOfWeekByKoreanName(String koreanName) {
+        for (Week day : Week.values()) {
             if (day.day().equals(koreanName)) {
                 return day;
             }
@@ -45,16 +45,16 @@ public enum DayInfo {
         return null;
     }
 
-    private static List<DayInfo> addOrderedDaysToList(DayInfo startDay) {
-        List<DayInfo> orderedDays = new ArrayList<>();
+    private static List<Week> addOrderedDaysToList(Week startDay) {
+        List<Week> orderedDays = new ArrayList<>();
         addDaysFromStartDay(orderedDays, startDay);
         addDaysBeforeStartDay(orderedDays, startDay);
         return orderedDays;
     }
 
-    private static void addDaysFromStartDay(List<DayInfo> orderedDays, DayInfo startDay) {
+    private static void addDaysFromStartDay(List<Week> orderedDays, Week startDay) {
         boolean started = false;
-        for (DayInfo day : DayInfo.values()) {
+        for (Week day : Week.values()) {
             if (day == startDay || started) {
                 orderedDays.add(day);
                 started = true;
@@ -62,8 +62,8 @@ public enum DayInfo {
         }
     }
 
-    private static void addDaysBeforeStartDay(List<DayInfo> orderedDays, DayInfo startDay) {
-        for (DayInfo day : DayInfo.values()) {
+    private static void addDaysBeforeStartDay(List<Week> orderedDays, Week startDay) {
+        for (Week day : Week.values()) {
             if (day == startDay) {
                 break;
             }
