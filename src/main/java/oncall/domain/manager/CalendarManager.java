@@ -14,7 +14,6 @@ public class CalendarManager {
         Month.exists(monthData, dayData);
         this.month = monthData;
         this.day = dayData;
-
     }
 
     public int getMonth() {

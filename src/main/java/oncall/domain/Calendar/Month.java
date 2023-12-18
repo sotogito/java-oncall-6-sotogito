@@ -1,9 +1,6 @@
 package oncall.domain.Calendar;
 
-import oncall.util.CalengarValidator;
-
-import java.util.ArrayList;
-import java.util.List;
+import oncall.util.validator.CalengarValidator;
 
 public enum Month {
     JANUARY(1, "일", 31),
@@ -49,7 +46,7 @@ public enum Month {
         }
         throw new IllegalArgumentException(CalengarValidator.ERROR_EXIST);
     }
-    /*
+
 
     public static int getNumberOfDays(int month) {
         for (Month monthInfo : Month.values()) {
@@ -59,6 +56,7 @@ public enum Month {
         }
         throw new IllegalArgumentException();
     }
+    /*
 
     public static List<Integer> getDaysOfMonth(int month) {
         int days = getNumberOfDays(month);

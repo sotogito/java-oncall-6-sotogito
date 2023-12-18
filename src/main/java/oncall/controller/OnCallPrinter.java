@@ -10,6 +10,7 @@ import oncall.view.OutputView;
 import java.util.List;
 
 public class OnCallPrinter {
+    /*
     private final int month; //월
     private final List<Integer> dayList; //일
     private final List<Week> weekdayList; //요일
@@ -64,5 +65,7 @@ public class OnCallPrinter {
         }
         return nextMember;
     }
+
+ */
 
 }

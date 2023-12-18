@@ -2,7 +2,7 @@ package oncall.domain.manager;
 
 import oncall.domain.manager.member.WeekdayOnCallMember;
 import oncall.domain.manager.member.WeekendOnCallMember;
-import oncall.util.MemberValidator;
+import oncall.util.validator.MemberValidator;
 
 import java.util.List;
 

@@ -9,4 +9,8 @@ public class OnCallScheduler {
     public OnCallScheduler(List<OnCallDayEntry> onCallList) {
         this.onCallList = onCallList;
     }
+
+    public List<OnCallDayEntry> getOnCallList(){
+        return onCallList;
+    }
 }
