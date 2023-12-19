@@ -20,14 +20,11 @@ public class OnCallController {
     public void run() {
         CalendarManager calendarManager = createCalendarManager();
         MemberManager memberManager = createMemberManager();
-
         OnCallScheduler onCallScheduler = createOnCallScheduler(calendarManager,memberManager);
 
-        for(OnCallDayEntry data : onCallScheduler.getOnCallList()){
-            System.out.println(data.getMonth()+"월 "+data.getDay()+"일 "+data.getDayOfWeek()+" "+data.getMember()+" "+data.getIsWeekend());
-
-        }
+        OnCallPrinter.runPrinter(onCallScheduler);
     }
+
 
     private OnCallScheduler createOnCallScheduler(CalendarManager calendarManager,MemberManager memberManager){
         OnCallMemberMaker weekdayMemberMaker = new WeekdayScheduler();
