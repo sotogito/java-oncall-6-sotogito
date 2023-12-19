@@ -34,5 +34,9 @@ public class OnCallDayEntry { //온콜 리스크의 '하루' 데이터를 담는
         return isWeekend;
     }
 
+    public void setMember(String member) {
+        this.member = member;
+    }
+
 
 }
