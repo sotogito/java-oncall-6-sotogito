@@ -16,6 +16,7 @@ import java.util.List;
 public class OnCallSchedulerMaker {
     private final OnCallMemberMaker weekdayMemberMaker;
     private final OnCallMemberMaker weekendMemberMaker;
+    private boolean isWeekend;
 
     public OnCallSchedulerMaker(OnCallMemberMaker weekday, OnCallMemberMaker weekend) {
         weekdayMemberMaker = weekday;
@@ -55,13 +56,15 @@ public class OnCallSchedulerMaker {
 
     private String getMemberDate(boolean isHoliday, Week dayOfWeek, MemberManager memberManager) {
         if (dayOfWeek.isWeekEnd() || isHoliday) {
+            isWeekend = true;
             return weekendMemberMaker.generate(memberManager.getWeekendOnCall());
         }
+        isWeekend = false;
         return weekdayMemberMaker.generate(memberManager.getWeekdayOnCall());
     }
 
     private OnCallDayEntry createOnCallDayEntry(int month, int day, String dayWeek, String member) {
-        return new OnCallDayEntry(month, day, dayWeek, member);
+        return new OnCallDayEntry(month, day, dayWeek, member,isWeekend);
     }
 
     private OnCallScheduler createOnCallScheduler(List<OnCallDayEntry> members) {

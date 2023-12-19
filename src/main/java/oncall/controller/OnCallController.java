@@ -24,7 +24,8 @@ public class OnCallController {
         OnCallScheduler onCallScheduler = createOnCallScheduler(calendarManager,memberManager);
 
         for(OnCallDayEntry data : onCallScheduler.getOnCallList()){
-            System.out.println(data.getMonth()+"월 "+data.getDay()+"일 "+data.getDayOfWeek()+" "+data.getMember());
+            System.out.println(data.getMonth()+"월 "+data.getDay()+"일 "+data.getDayOfWeek()+" "+data.getMember()+" "+data.getIsWeekend());
+
         }
     }
 
