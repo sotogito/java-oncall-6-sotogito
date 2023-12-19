@@ -1,6 +1,4 @@
-package oncall.domain;
-
-import oncall.domain.OnCallDayEntry;
+package oncall.domain.maker;
 
 import java.util.List;
 

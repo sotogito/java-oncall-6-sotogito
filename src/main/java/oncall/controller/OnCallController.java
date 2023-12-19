@@ -1,11 +1,15 @@
 package oncall.controller;
 
-import oncall.domain.*;
+import oncall.domain.maker.OnCallMemberMaker;
 import oncall.domain.manager.CalendarManager;
 import oncall.domain.manager.MemberManager;
 import oncall.domain.manager.member.WeekdayOnCallMember;
 import oncall.domain.manager.member.WeekendOnCallMember;
-import oncall.util.OnCallSchedulerMaker;
+import oncall.domain.scheduler.OnCallDayEntry;
+import oncall.domain.scheduler.OnCallScheduler;
+import oncall.domain.scheduler.WeekdayScheduler;
+import oncall.domain.scheduler.WeekendScheduler;
+import oncall.domain.maker.OnCallSchedulerMaker;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -22,18 +26,16 @@ public class OnCallController {
         for(OnCallDayEntry data : onCallScheduler.getOnCallList()){
             System.out.println(data.getMonth()+"월 "+data.getDay()+"일 "+data.getDayOfWeek()+" "+data.getMember());
         }
-
-
     }
 
     private OnCallScheduler createOnCallScheduler(CalendarManager calendarManager,MemberManager memberManager){
         OnCallMemberMaker weekdayMemberMaker = new WeekdayScheduler();
         OnCallMemberMaker weekendMemberMaker = new WeekendScheduler();
+        //index 초기화
 
         OnCallSchedulerMaker maker = new OnCallSchedulerMaker(weekdayMemberMaker,weekendMemberMaker);
         return maker.runMaker(calendarManager,memberManager);
     }
-
 
     private CalendarManager createCalendarManager() {
         try {

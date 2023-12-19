@@ -1,8 +1,10 @@
-package oncall.domain;
+package oncall.domain.scheduler;
+
+import oncall.domain.maker.OnCallMemberMaker;
 
 import java.util.List;
 
-public class WeekendScheduler implements OnCallMemberMaker{
+public class WeekendScheduler implements OnCallMemberMaker {
     private static int index;
 
     public WeekendScheduler() {

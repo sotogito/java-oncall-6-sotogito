@@ -1,11 +1,13 @@
-package oncall.util;
+package oncall.domain.maker;
 
-import oncall.domain.*;
 import oncall.domain.Calendar.Month;
 import oncall.domain.Calendar.PublicHoliday;
 import oncall.domain.Calendar.Week;
+import oncall.domain.maker.OnCallMemberMaker;
 import oncall.domain.manager.CalendarManager;
 import oncall.domain.manager.MemberManager;
+import oncall.domain.scheduler.OnCallDayEntry;
+import oncall.domain.scheduler.OnCallScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,7 @@ public class OnCallSchedulerMaker {
         List<Week> weekList = Week.getOrderedDaysStartingFrom(calendarManager.getDay());
 
         for (int i = 1; i <= dayCount; i++) {
-            OnCallDayEntry member = runDayEntryMaker(month, i, weekList.get((i - 1) % weekList.size()), memberManager);
-            result.add(member);
+            result.add(runDayEntryMaker(month, i, weekList.get((i - 1) % weekList.size()), memberManager));
         }
 
         return createOnCallScheduler(result);
@@ -51,7 +52,6 @@ public class OnCallSchedulerMaker {
         return dayOfWeekData;
     }
 
-
     private String getMemberDate(boolean isHoliday, Week dayOfWeek, MemberManager memberManager) {
         if (dayOfWeek.isWeekEnd() || isHoliday) {
             return weekendMemberMaker.generate(memberManager.getWeekendOnCall());
@@ -65,7 +65,6 @@ public class OnCallSchedulerMaker {
 
     private OnCallScheduler createOnCallScheduler(List<OnCallDayEntry> members) {
         return new OnCallScheduler(members);
-
     }
 
 }
