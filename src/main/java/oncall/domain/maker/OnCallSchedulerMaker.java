@@ -8,6 +8,7 @@ import oncall.domain.manager.CalendarManager;
 import oncall.domain.manager.MemberManager;
 import oncall.domain.scheduler.OnCallDayEntry;
 import oncall.domain.scheduler.OnCallScheduler;
+import oncall.util.OnCallScheduleConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class OnCallSchedulerMaker {
     private String getDayOfWeekData(boolean isHoliday, Week dayOfWeek){
         String dayOfWeekData = dayOfWeek.day();
         if (!dayOfWeek.isWeekEnd() && isHoliday) {
-            dayOfWeekData += "(휴일)";
+            dayOfWeekData += OnCallScheduleConstant.HOLIDAY;
         }
         return dayOfWeekData;
     }
