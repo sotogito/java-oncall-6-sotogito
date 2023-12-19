@@ -1,16 +1,15 @@
 package oncall.domain.scheduler;
 
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 
 public class OnCallScheduler {
 
-    private List<OnCallDayEntry> onCallList;
+    private final List<OnCallDayEntry> onCallList;
 
     public OnCallScheduler(List<OnCallDayEntry> onCallList) {
         this.onCallList = onCallList;
-        while (isDuplicateMember()){
+        while (isDuplicateMember()) {
             removeDuplicates();
         }
     }
@@ -20,10 +19,10 @@ public class OnCallScheduler {
     }
 
     private boolean isDuplicateMember() {
-        for(int i = 0; i<onCallList.size()-1; i++){
+        for (int i = 0; i < onCallList.size() - 1; i++) {
             String prev = onCallList.get(i).getMember();
-            String current = onCallList.get(i+1).getMember();
-            if(prev.equals(current)){
+            String current = onCallList.get(i + 1).getMember();
+            if (prev.equals(current)) {
                 return true;
             }
         }
@@ -31,19 +30,19 @@ public class OnCallScheduler {
     }
 
     private void removeDuplicates() {
-        for(int i = 0; i<onCallList.size()-2; i++){
+        for (int i = 0; i < onCallList.size() - 2; i++) {
             OnCallDayEntry prev = onCallList.get(i);
-            OnCallDayEntry current = onCallList.get(i+1);
-            OnCallDayEntry next = onCallList.get(i+2);
+            OnCallDayEntry current = onCallList.get(i + 1);
+            OnCallDayEntry next = onCallList.get(i + 2);
 
-            if(prev.getMember().equals(current.getMember())){
-                switchingMember(current,next);
+            if (prev.getMember().equals(current.getMember())) {
+                switchingMember(current, next);
                 i = Math.max(i - 1, 0); //교체 후 재확인
             }
         }
     }
 
-    private void switchingMember(OnCallDayEntry current,OnCallDayEntry next){
+    private void switchingMember(OnCallDayEntry current, OnCallDayEntry next) {
         String currentMemberSave = current.getMember();
 
         current.setMember(next.getMember());

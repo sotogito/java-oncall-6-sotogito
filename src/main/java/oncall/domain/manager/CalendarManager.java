@@ -12,6 +12,7 @@ public class CalendarManager {
         int monthData = Integer.parseInt(date.get(0));
         String dayData = date.get(1);
         Month.exists(monthData, dayData);
+
         this.month = monthData;
         this.day = dayData;
     }

@@ -44,8 +44,8 @@ public class MemberValidator {
         return set.size() != list.size();
     }
 
-    private static boolean isNameWithinLength(List<String> list){
-        for(String name : list){
+    private static boolean isNameWithinLength(List<String> list) {
+        for (String name : list) {
             return name.length() <= 5;
         }
         return false;

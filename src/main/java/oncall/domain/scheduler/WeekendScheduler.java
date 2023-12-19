@@ -17,4 +17,5 @@ public class WeekendScheduler implements OnCallMemberMaker {
         index++;
         return member;
     }
+
 }

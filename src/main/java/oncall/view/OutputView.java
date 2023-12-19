@@ -1,10 +1,11 @@
 package oncall.view;
 
 public class OutputView {
+    private final static String ERROR_CONSTANT = "[ERROR] ";
     private final static String ON_CALL_LIST_TEMPLATE = "%d월 %d일 %s %s\n";
 
     public static void printErrorMessage(String error) {
-        System.out.print("[ERROR] " + error);
+        System.out.print(ERROR_CONSTANT + error);
     }
 
     public static void printOnCallList(int month, int day, String weekday, String member) {

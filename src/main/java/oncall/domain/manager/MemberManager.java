@@ -14,9 +14,9 @@ public class MemberManager {
         MemberValidator.memberValidate(weekdayOnCall.getWeekdayOnCall());
         MemberValidator.memberValidate(weekendOnCall.getWeekendOnCall());
         MemberValidator.membersValidate(weekdayOnCall.getWeekdayOnCall(), weekdayOnCall.getWeekdayOnCall());
+
         this.weekdayOnCall = weekdayOnCall;
         this.weekendOnCall = weekendOnCall;
-
     }
 
     public List<String> getWeekdayOnCall() {

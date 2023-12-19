@@ -3,7 +3,6 @@ package oncall.domain.maker;
 import oncall.domain.Calendar.Month;
 import oncall.domain.Calendar.PublicHoliday;
 import oncall.domain.Calendar.Week;
-import oncall.domain.maker.OnCallMemberMaker;
 import oncall.domain.manager.CalendarManager;
 import oncall.domain.manager.MemberManager;
 import oncall.domain.scheduler.OnCallDayEntry;
@@ -25,7 +24,6 @@ public class OnCallSchedulerMaker {
 
     public OnCallScheduler runMaker(CalendarManager calendarManager, MemberManager memberManager) {
         List<OnCallDayEntry> result = new ArrayList<>();
-
         int month = calendarManager.getMonth();
         int dayCount = Month.getNumberOfDays(calendarManager.getMonth());
         List<Week> weekList = Week.getOrderedDaysStartingFrom(calendarManager.getDay());
@@ -40,13 +38,13 @@ public class OnCallSchedulerMaker {
 
     public OnCallDayEntry runDayEntryMaker(int month, int day, Week dayOfWeek, MemberManager memberManager) {
         boolean isHoliday = PublicHoliday.isHoliday(month, day);
-        String dayOfWeekData = getDayOfWeekData(isHoliday,dayOfWeek);
+        String dayOfWeekData = getDayOfWeekData(isHoliday, dayOfWeek);
         String memberData = getMemberDate(isHoliday, dayOfWeek, memberManager);
 
         return createOnCallDayEntry(month, day, dayOfWeekData, memberData);
     }
 
-    private String getDayOfWeekData(boolean isHoliday, Week dayOfWeek){
+    private String getDayOfWeekData(boolean isHoliday, Week dayOfWeek) {
         String dayOfWeekData = dayOfWeek.day();
         if (!dayOfWeek.isWeekEnd() && isHoliday) {
             dayOfWeekData += OnCallScheduleConstant.HOLIDAY;
@@ -64,7 +62,7 @@ public class OnCallSchedulerMaker {
     }
 
     private OnCallDayEntry createOnCallDayEntry(int month, int day, String dayWeek, String member) {
-        return new OnCallDayEntry(month, day, dayWeek, member,isWeekend);
+        return new OnCallDayEntry(month, day, dayWeek, member, isWeekend);
     }
 
     private OnCallScheduler createOnCallScheduler(List<OnCallDayEntry> members) {

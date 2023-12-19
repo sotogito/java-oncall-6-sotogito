@@ -13,4 +13,5 @@ public class WeekdayOnCallMember {
     public List<String> getWeekdayOnCall() {
         return weekdayOnCall;
     }
+
 }
