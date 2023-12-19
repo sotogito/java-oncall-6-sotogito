@@ -10,7 +10,7 @@ public class OnCallScheduler {
 
     public OnCallScheduler(List<OnCallDayEntry> onCallList) {
         this.onCallList = onCallList;
-        while (!isDuplicateMember()){
+        while (isDuplicateMember()){
             removeDuplicates();
         }
     }
@@ -23,12 +23,11 @@ public class OnCallScheduler {
         for(int i = 0; i<onCallList.size()-1; i++){
             String prev = onCallList.get(i).getMember();
             String current = onCallList.get(i+1).getMember();
-
             if(prev.equals(current)){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private void removeDuplicates() {
@@ -38,9 +37,8 @@ public class OnCallScheduler {
             OnCallDayEntry next = onCallList.get(i+2);
 
             if(prev.getMember().equals(current.getMember())){
-                System.out.println(prev.getMember());
-                System.out.println(current.getMember());
                 switchingMember(current,next);
+                i = Math.max(i - 1, 0); //교체 후 재확인
             }
         }
     }
