@@ -30,6 +30,15 @@ public enum MonthDays {
         return days;
     }
 
+    public static int findNumberOfDaysByMonth(int month) {
+        for (MonthDays day : MonthDays.values()) {
+            if (day.getMonth() == month) {
+                return day.getDays();
+            }
+        }
+        throw new IllegalArgumentException("존재하지 않는  month입니다.");
+    }
+
 
 
 }
