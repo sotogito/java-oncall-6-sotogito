@@ -19,6 +19,8 @@ public class MemberValidator {
             throw new IllegalArgumentException(ERROR_MEMBER);
         } else if (!isNameWithinLength(list)) {
             throw new IllegalArgumentException(ERROR_MEMBER);
+        } else if (isContainSpace(list)) {
+            throw new IllegalArgumentException(ERROR_MEMBER);
         }
     }
 
@@ -49,6 +51,10 @@ public class MemberValidator {
             return name.length() <= 5;
         }
         return false;
+    }
+
+    private static boolean isContainSpace(List<String> list) {
+        return list.contains("");
     }
 
 }
