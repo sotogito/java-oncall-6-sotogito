@@ -36,13 +36,17 @@ public class StaffParser {
         for (String s : splitWord) {
             Optional<Staff> newStaff = weekdayStaffs.getStaffByName(s.trim());
             if(newStaff.isEmpty()){
-                throw new IllegalArgumentException("주말과, 평일 멤버가 달라요.");
+                throw new IllegalArgumentException("유효하지 않은 입력 값입니다. 다시 입력해 주세요. 주말과, 평일 멤버가 달라요.\n");
             }
             result.add(newStaff.get());
         }
 
+
         if(result.size() <5 || result.size() > 35){
-            throw new IllegalArgumentException("인원은 총 5~35까지 가능합니다.");
+            throw new IllegalArgumentException("유효하지 않은 입력 값입니다. 다시 입력해 주세요. 인원은 총 5~35까지 가능합니다.\n");
+        }
+        if(result.size() != weekdayStaffs.getNumberOfStaff()){
+            throw new IllegalArgumentException("유효하지 않은 입력 값입니다. 다시 입력해 주세요. 주말과, 평일 멤버가 달라요.\n");
         }
 
 
@@ -56,7 +60,7 @@ public class StaffParser {
         Set<Staff> carSet = new HashSet<>();
         for (Staff car : staff) {
             if (!carSet.add(car)) {
-                throw new IllegalArgumentException("중복된 닉네임이 있어요.");
+                throw new IllegalArgumentException("유효하지 않은 입력 값입니다. 다시 입력해 주세요. 중복된 닉네임이 있어요.\n");
             }
         }
     }
