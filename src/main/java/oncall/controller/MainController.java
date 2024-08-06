@@ -1,12 +1,17 @@
 package oncall.controller;
 
+import oncall.domain.OnCallService;
 import oncall.domain.Staffs;
 import oncall.domain.member.Staff;
 import oncall.domain.member.WeekdayStaffs;
 import oncall.domain.member.WeekendStaffs;
+import oncall.domain.schedule.Day;
+import oncall.domain.schedule.Days;
+import oncall.util.MonthDayOfWeekParser;
 import oncall.util.OnCallListFormatter;
 import oncall.util.staff.StaffParser;
 import oncall.view.Input;
+import oncall.view.OnCallPrinter;
 import oncall.view.Output;
 
 import java.util.ArrayList;
@@ -15,24 +20,49 @@ import java.util.List;
 public class MainController {
 
     public void main() {
+
+        Days days = createDays();
+
+
         List<Staffs> staffs = createStaffs();
         Staffs weekdayStaffs = staffs.get(0);
         Staffs weekendStaffs = staffs.get(1);
+
+
+
+        OnCallService onCallService = createOnCallService(days, weekdayStaffs, weekendStaffs);
+
+        onCallService.onCallMatch();
+
+
+        OnCallPrinter.print(days);
+
+
         /*
-        while (true) {
-            try {
-                weekdayStaffs = createWeekdayStaffs();
-                weekendStaffs = createWeekendStaffs(weekdayStaffs);
-            } catch (IllegalArgumentException e) {
-                Output.printError(e.getMessage());
-            }
+        for(Day day : days.getDays()) {
+            System.out.println(OnCallListFormatter.format(day));
         }
 
          */
 
-        System.out.println(weekdayStaffs);
-        System.out.println(weekendStaffs);
+    }
 
+
+    public OnCallService createOnCallService(Days days, Staffs weekdayStaffs, Staffs weekendStaffs) {
+        return new OnCallService(days, weekdayStaffs, weekendStaffs);
+    }
+
+    public Days createDays(){
+        while (true){
+            try{
+                List<String> monthAndStartDayOfWeek = MonthDayOfWeekParser.parse(Input.inputMonthAndStartDayOfWeek());
+                int month = Integer.parseInt(monthAndStartDayOfWeek.get(0));
+                String dayOfWeek = monthAndStartDayOfWeek.get(1);
+                return new Days(month,dayOfWeek);
+            }catch (IllegalArgumentException e){
+                Output.printError(e.getMessage());
+            }
+        }
     }
 
     public List<Staffs> createStaffs(){
@@ -54,12 +84,12 @@ public class MainController {
     }
 
     public WeekdayStaffs createWeekdayStaffs() {
-        List<Staff> weekdayStaffs = StaffParser.getWeekdayStaffList(Input.inputStaffsName());
+        List<Staff> weekdayStaffs = StaffParser.getWeekdayStaffList(Input.inputWeekdayStaffsName());
         return new WeekdayStaffs(weekdayStaffs);
     }
 
     public WeekendStaffs createWeekendStaffs(WeekdayStaffs weekdayStaffs) {
-        List<Staff> weekendStaffs = StaffParser.getWeekendStaffList(Input.inputStaffsName(), weekdayStaffs);
+        List<Staff> weekendStaffs = StaffParser.getWeekendStaffList(Input.inputWeekendStaffsName(), weekdayStaffs);
         return new WeekendStaffs(weekendStaffs);
 
     }
