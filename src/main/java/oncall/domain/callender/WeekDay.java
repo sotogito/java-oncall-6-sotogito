@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.callender;
 
 public enum WeekDay {
     MONDAY("월", false),
@@ -25,9 +25,6 @@ public enum WeekDay {
         return isWeekend;
     }
 
-    @Override
-    public String toString() {
-        return koreanName + (isWeekend ? " (주말)" : " (평일)");
-    }
+
 
 }

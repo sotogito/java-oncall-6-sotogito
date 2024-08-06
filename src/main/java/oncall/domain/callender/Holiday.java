@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.callender;
 
 public enum Holiday {
     NEW_YEAR("신정", 1, 1),
@@ -32,9 +32,6 @@ public enum Holiday {
         return day;
     }
 
-    @Override
-    public String toString() {
-        return name + " (" + month + "월 " + day + "일)";
-    }
-    
+
+
 }

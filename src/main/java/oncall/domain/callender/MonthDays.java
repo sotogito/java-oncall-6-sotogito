@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.callender;
 
 public enum MonthDays {
     JANUARY(1, 31),
@@ -30,9 +30,6 @@ public enum MonthDays {
         return days;
     }
 
-    @Override
-    public String toString() {
-        return month + "월 (" + days + "일)";
-    }
+
 
 }
