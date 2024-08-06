@@ -3,11 +3,11 @@
    2. MonthDayOfWeekParser 
    3. MonthDayListMaker - Days에서 제대로된 List<Day> 만들기
 2. Staff 데이터 생성
-   1. Name 객체
-   2. Staff 객체 - name, isholiday
-   3. WeekdayStaffs, WeekdayParser
-   4. HolidayStaffs,HolidayParser
-   5. 유효검사
+   1. ~~Name 객체~~
+   2. ~~Staff 객체 - name, isholiday~~
+   3. ~~WeekdayStaffs, WeekdayParser~~
+   4. H~~olidayStaffs,HolidayParse~~r
+   5. ~~유효검사~~
 3. List<Day>에 Staff 데이터 추가
    1. for days 돌려서 isWeekend, isholiwood 확인
 

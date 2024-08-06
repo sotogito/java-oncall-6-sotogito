@@ -1,4 +1,4 @@
-- Staff
+~~- Staff
   - ~~int order~~
   - Name name
   - boolean isHoilday
@@ -18,7 +18,7 @@
 - HolidayParser
 
 - OnCallService -  impl -WeekdayStaffs,HolidayStaffs,ScheduleRepository
-- OnCallPrinter
+- OnCallPrinter~~
 
 #### Enum
 - Holiday
