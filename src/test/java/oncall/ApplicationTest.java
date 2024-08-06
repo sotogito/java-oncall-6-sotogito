@@ -72,6 +72,50 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 중복된_사원_테스트(){
+        assertSimpleTest(() -> {
+            run(
+                    "3,수",
+                    "1,2,3,4,5",
+                    "5,4,3,2,1"
+            );
+            assertThat(output()).contains(
+                    "3월 5일 일 3" + LINE_SEPARATOR,
+                    "3월 6일 월 4" + LINE_SEPARATOR,
+                    "3월 7일 화 3" + LINE_SEPARATOR
+            );
+        });
+    }
+
+    @Test
+    void 평일_공휴일_테스트(){
+        assertSimpleTest(() -> {
+            run(
+                    "12,금",
+                    "1,2,3,4,5",
+                    "5,4,3,2,1"
+            );
+            assertThat(output()).contains(
+                    "12월 25일 월(휴일) 2" + LINE_SEPARATOR
+            );
+        });
+    }
+
+    @Test
+    void 주말_공휴일_테스트(){
+        assertSimpleTest(() -> {
+            run(
+                    "1,일",
+                    "1,2,3,4,5",
+                    "5,4,3,2,1"
+            );
+            assertThat(output()).contains(
+                    "1월 1일 일 5" + LINE_SEPARATOR
+            );
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
