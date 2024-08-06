@@ -14,6 +14,9 @@ public class WeekendStaffs implements Staffs {
 
     }
 
+    public List<Staff> getStaffs() {
+        return staffs;
+    }
 
 
     public WorkType getWorkType() {

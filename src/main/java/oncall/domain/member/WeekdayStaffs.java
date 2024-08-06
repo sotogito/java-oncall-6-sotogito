@@ -14,6 +14,10 @@ public class WeekdayStaffs implements Staffs {
         this.staffs = staffs;
     }
 
+    public List<Staff> getStaffs() {
+        return staffs;
+    }
+
     public Optional<Staff> getStaffByName(String name) {
         for (Staff staff : staffs) {
             if (staff.getName().equals(name)) {
