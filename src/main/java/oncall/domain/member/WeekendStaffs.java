@@ -9,7 +9,8 @@ import java.util.List;
 public class WeekendStaffs implements Staffs {
     private List<Staff> staffs = new ArrayList<>();
 
-    public WeekendStaffs() {
+    public WeekendStaffs(List<Staff> staffs) {
+        this.staffs = staffs;
 
     }
 
@@ -22,4 +23,17 @@ public class WeekendStaffs implements Staffs {
     public boolean isWeekend(){
         return getWorkType().isWeekend();
     }
+    public int getNumberOfStaff(){
+        return staffs.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Staff staff : staffs) {
+            builder.append(staff.toString()).append("\n");
+        }
+        return builder.toString();
+    }
+
 }
