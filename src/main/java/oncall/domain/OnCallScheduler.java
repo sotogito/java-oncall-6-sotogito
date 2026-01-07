@@ -45,46 +45,67 @@ public class OnCallScheduler {
 
         System.out.println(totalDays);
 
-        LocalDate date = this.date;
+        LocalDate workDate = this.date;
         int dayCount = 1;
         do {
-            DayOfWeekKorean dayOfWeekKorean = DayOfWeekKorean.find(date.getDayOfWeek());
+            DayOfWeekKorean dayOfWeekKorean = DayOfWeekKorean.find(workDate.getDayOfWeek());
 
             if (dayOfWeekKorean.isWeekend()) {
                 onCall.add(weekend.get(weekendIndex)
                         .newWorker(
-                                date,
+                                workDate,
                                 WorkType.WEEKEND
                         ));
                 weekendIndex = (weekendIndex + 1) % weekend.size();
             } else {
-                if (LegalHoliday.isLegalHoliday(date)) {
+                if (LegalHoliday.isLegalHoliday(workDate)) {
                     onCall.add(weekend.get(weekendIndex)
                             .newWorker(
-                                    date,
+                                    workDate,
                                     WorkType.HOLIDAY
                             ));
                     weekendIndex = (weekendIndex + 1) % weekend.size();
                 } else {
                     onCall.add(weekday.get(weekdayIndex)
                             .newWorker(
-                                    date,
+                                    workDate,
                                     WorkType.WEEKDAY
                             ));
                     weekdayIndex = (weekdayIndex + 1) % weekday.size();
                 }
             }
 
-            date = date.plusDays(1);
+            workDate = workDate.plusDays(1);
             dayCount++;
         } while (dayCount <= totalDays);
 
         /// 연속 변경해야됨
+        processContinuousWork(onCall);
 
         Collections.sort(onCall);
         return onCall;
     }
 
+    //1,2,3,3,5
+    private void processContinuousWork(List<Worker> workers) {
+
+        Worker before = null;
+        Worker target = null;
+
+        for (Worker worker : workers) {
+            if (target != null) {
+                target.change(worker);
+
+                before = target;
+                target = null;
+                continue;
+            }
+            if (worker.equals(before)) {
+                target = worker;
+            }
+            before = worker;
+        }
+    }
 
 
     @Override

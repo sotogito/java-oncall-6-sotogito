@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Worker implements Comparable<Worker> {
-    private final String nickname;
+    private String nickname;
     private LocalDate workDate;
     private final WorkType workType;
 
@@ -29,6 +29,14 @@ public class Worker implements Comparable<Worker> {
         if (nickname.isEmpty() || nickname.length() > 5) {
             throw new IllegalArgumentException("사원 닉네임은 최대 5자까지 가능합니다.");
         }
+    }
+
+    public void change(Worker other) {
+        String otherName = other.nickname;
+        String thisName = this.nickname;
+
+        this.nickname = otherName;
+        other.nickname = thisName;
     }
 
     public Worker newWorker(LocalDate workDate, WorkType workType) {
