@@ -25,6 +25,13 @@ public class Workers {
     }
 
 
+    public List<Worker> getWorkersByWorkType(WorkType workType) {
+        if (workers.containsKey(workType)) {
+            return workers.get(workType);
+        }
+        return List.of();
+    }
+
     public static void validateDuplicate(List<Worker> staffs) {
         if (staffs.size() != new HashSet<>(staffs).size()) {
             throw new IllegalArgumentException("중복된 사원 이름이 있습니다.");
